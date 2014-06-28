@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+
+<title>d3-grid examples</title>
+
+<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+
+<style>
+
+	body {
+		max-width: 60rem;
+	}
+
+	#axis-example .x.axis line {
+		stroke: #fff;
+	}
+
+	.marginal svg {
+		font-size: 0.7em;
+	}
+
+	.axis path,
+	.axis line {
+		fill: none;
+		stroke: #000;
+		shape-rendering: crispEdges;
+	}
+
+	.grid line {
+		fill: none;
+		stroke: white;
+		shape-rendering: crispEdges;
+	}
+	.grid .major {
+		stroke-width: 3px;
+	}
+	.grid .minor {
+		stroke-width: 1px;
+	}
+
+	path.line {
+		fill: none;
+		stroke: steelblue;
+		stroke-width: 1.5px;
+	}
+
+	path.area {
+		fill: #e7e7e7;
+	}
+
+	rect.background {
+		fill: #ddd;
+	}
+
+	circle.dot, rect.bar {
+		fill: steelblue;
+		stroke: none;
+	}
+
+</style>
+
+<body>
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="../d3-grid.js"></script>
+<script src="examples.js"></script>
+
+<div id="example" class="marginal"></div>
+<div id="scatter-example"></div>
+<div id="ordinal-example"></div>	

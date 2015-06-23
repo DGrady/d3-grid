@@ -1,9 +1,3 @@
-// This project is done when:
-// - [X] code is fully commented
-// - [ ] short blog post that inlines the code to explain the motivation
-// - [ ] Git repository with the plugin
-// - [X] Example page demoing different scales on the same page
-
 // `d3.svg.grid` is a new component for D3 that simplifies drawing a rectangular
 // grid, for example in a scatter plot. The main use case is when you want to draw
 // axis tick marks as well as grid lines.

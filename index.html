@@ -27,13 +27,9 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <p>This project is done when:</p>
-<ul>
-<li>[X] code is fully commented</li>
-<li>[ ] short blog post that inlines the code to explain the motivation</li>
-<li>[ ] Git repository with the plugin</li>
-<li>[X] Example page demoing different scales on the same page</li>
-</ul>
+              <p><code>d3.svg.grid</code> is a new component for D3 that simplifies drawing a rectangular
+grid, for example in a scatter plot. The main use case is when you want to draw
+axis tick marks as well as grid lines.</p>
 
             </div>
             
@@ -46,11 +42,22 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p><code>d3.svg.grid</code> is a new component for D3 that simplifies drawing a rectangular
-grid, for example in a scatter plot. The main use case is when you want to draw
-axis tick marks as well as grid lines.</p>
+              <p>This component works just like <code>d3.svg.axis</code>: it’s a factory function that
+returns a configurable <code>grid</code> function, which you call on a selection (or
+transition) of <code>svg</code> or <code>g</code> elements. The only configurable interface it
+exposes are functions to set the x- and- y-axis.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>
+d3.svg.grid = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+
+  <span class="hljs-keyword">var</span> ε = <span class="hljs-number">1e-6</span>;
+
+  <span class="hljs-keyword">var</span> xAxis = d3.svg.axis(),
+      yAxis = d3.svg.axis();
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">grid</span>(<span class="hljs-params">g</span>) </span>{</pre></div></div>
             
         </li>
         
@@ -60,32 +67,6 @@ axis tick marks as well as grid lines.</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
-              </div>
-              <p>This component works just like <code>d3.svg.axis</code>: it’s a factory function that
-returns a configurable <code>grid</code> function, which you call on a selection (or
-transition) of <code>svg</code> or <code>g</code> elements. The only configurable interface it
-exposes are functions to set the x- and- y-axis.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>
-d3.svg.grid = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-
-  <span class="hljs-keyword">var</span> ε = <span class="hljs-number">1e-6</span>;
-
-  <span class="hljs-keyword">var</span> xAxis = d3.svg.axis(),
-      yAxis = d3.svg.axis();
-
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">grid</span><span class="hljs-params">(g)</span> {</span></pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-4">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
               <p><code>d3.svg.grid</code> works just like <code>d3.svg.axis</code>: you call it on a selection
 (or transition), and it draws SVG elements inside each element of the
@@ -97,11 +78,11 @@ be a transition is important below.</p>
         </li>
         
         
-        <li id="section-5">
+        <li id="section-4">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
+                <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
               <p><a href="https://github.com/mbostock/d3/wiki/Selections#wiki-each"><code>d3.selection.each</code></a>
 runs some function for each element in a selection, setting <code>this</code> to the
@@ -109,16 +90,16 @@ element and supplying the corresponding datum and index.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    g.each(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(datum, index)</span> {</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>    g.each(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">datum, index</span>) </span>{</pre></div></div>
             
         </li>
         
         
-        <li id="section-6">
+        <li id="section-5">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
+                <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
               <p>Now, the variable <code>g</code> is (by assumption) a single <code>svg</code> or <code>g</code> element.</p>
 
@@ -129,11 +110,11 @@ element and supplying the corresponding datum and index.</p>
         </li>
         
         
-        <li id="section-7">
+        <li id="section-6">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
+                <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <p>Now we have a handle on a single element to draw the grid into. This
 element might or might not already have a grid, and if there is a grid
@@ -150,11 +131,11 @@ DOM.</p>
         </li>
         
         
-        <li id="section-8">
+        <li id="section-7">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <p>Create a stash for scales if it doesn’t exist</p>
 
@@ -165,11 +146,11 @@ DOM.</p>
         </li>
         
         
-        <li id="section-9">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p>The old scales, that we’re transitioning away from</p>
 
@@ -181,11 +162,11 @@ DOM.</p>
         </li>
         
         
-        <li id="section-10">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>The new scales that we’re transitioning to (and stash a copy of them)</p>
 
@@ -204,11 +185,11 @@ DOM.</p>
         </li>
         
         
-        <li id="section-11">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>Now we create a selection that has exactly one item by binding some
 dummy data to it.</p>
@@ -220,11 +201,11 @@ dummy data to it.</p>
         </li>
         
         
-        <li id="section-12">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <p>If there are no matching elements in the DOM, we create them.</p>
 
@@ -235,11 +216,11 @@ dummy data to it.</p>
         </li>
         
         
-        <li id="section-13">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>Now the <code>xGrid</code> selection definitely has exactly one <code>g</code> element in it,
 which is the canvas we’ll use for drawing all of the x-grid lines.</p>
@@ -249,11 +230,11 @@ which is the canvas we’ll use for drawing all of the x-grid lines.</p>
         </li>
         
         
-        <li id="section-14">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <p>We make a selection that includes all <code>line</code> elements inside the
 <code>xGrid</code> collection. We want there to be one <code>line</code> per tick mark, and
@@ -290,16 +271,16 @@ tick value.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">var</span> xGridLines = xGrid.selectAll(<span class="hljs-string">"line"</span>).data(ticks(<span class="hljs-string">"x"</span>), <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(d)</span> {</span> <span class="hljs-keyword">return</span> d; });</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">var</span> xGridLines = xGrid.selectAll(<span class="hljs-string">"line"</span>).data(ticks(<span class="hljs-string">"x"</span>), <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d; });</pre></div></div>
             
         </li>
         
         
-        <li id="section-15">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p>Now we follow the enter, update, exit pattern. We append new elements
 for any tick values that didn’t already have corresponding <code>line</code>s, but
@@ -326,11 +307,11 @@ entering position. We make this switch using the ternary operator.</p>
         </li>
         
         
-        <li id="section-16">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p>Now we transition the opacity of all <code>line</code> elements to 1. Why do we
 use <code>d3.transition(xGridLines)</code> instead of calling
@@ -350,11 +331,11 @@ new scale to move grid lines into their final positions.</p>
         </li>
         
         
-        <li id="section-17">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>Lastly, any grid lines we don’t need anymore get faded out, moved to
 new positions, and then removed. Except, again, if we are
@@ -372,11 +353,11 @@ their old positions.</p>
         </li>
         
         
-        <li id="section-18">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <p>And we do the whole thing over for the y grid!</p>
 
@@ -385,7 +366,7 @@ their old positions.</p>
             <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">var</span> yGrid = g.selectAll(<span class="hljs-string">"g.y.grid"</span>).data([<span class="hljs-number">0</span>]);
       yGrid.enter().append(<span class="hljs-string">"g"</span>).attr(<span class="hljs-string">"class"</span>, <span class="hljs-string">"y grid"</span>);
 
-      <span class="hljs-keyword">var</span> yGridLines = yGrid.selectAll(<span class="hljs-string">"line"</span>).data(ticks(<span class="hljs-string">"y"</span>), <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(d)</span> {</span> <span class="hljs-keyword">return</span> d; });
+      <span class="hljs-keyword">var</span> yGridLines = yGrid.selectAll(<span class="hljs-string">"line"</span>).data(ticks(<span class="hljs-string">"y"</span>), <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> d; });
       yGridLines.enter().append(<span class="hljs-string">"line"</span>)
           .style(<span class="hljs-string">"opacity"</span>, ε)
           .call(transformY, isOrdinal(sy) ? sy : sy0);
@@ -400,36 +381,36 @@ their old positions.</p>
         </li>
         
         
-        <li id="section-19">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p>That’s it. Everything else here is boilerplate or details.</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>
-      <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">transformX</span> <span class="hljs-params">(selection, sIn)</span> {</span>
+      <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">transformX</span> (<span class="hljs-params">selection, sIn</span>) </span>{
         <span class="hljs-keyword">var</span> s = ordinalTickCorrection(sIn);
         selection
           .attr({
-            <span class="hljs-string">"x1"</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(d)</span> {</span> <span class="hljs-keyword">return</span> s(d); },
+            <span class="hljs-string">"x1"</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> s(d); },
             <span class="hljs-string">"y1"</span>: y1,
-            <span class="hljs-string">"x2"</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(d)</span> {</span> <span class="hljs-keyword">return</span> s(d); },
+            <span class="hljs-string">"x2"</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> s(d); },
             <span class="hljs-string">"y2"</span>: y2
           });
       }
 
-      <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">transformY</span> <span class="hljs-params">(selection, sIn)</span> {</span>
+      <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">transformY</span> (<span class="hljs-params">selection, sIn</span>) </span>{
         <span class="hljs-keyword">var</span> s = ordinalTickCorrection(sIn);
         selection
           .attr({
             <span class="hljs-string">"x1"</span>: x1,
-            <span class="hljs-string">"y1"</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(d)</span> {</span> <span class="hljs-keyword">return</span> s(d); },
+            <span class="hljs-string">"y1"</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> s(d); },
             <span class="hljs-string">"x2"</span>: x2,
-            <span class="hljs-string">"y2"</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(d)</span> {</span> <span class="hljs-keyword">return</span> s(d); }
+            <span class="hljs-string">"y2"</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> s(d); }
           });
       }
 
@@ -437,13 +418,13 @@ their old positions.</p>
 
   }
 
-  grid.xAxis = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(_)</span> {</span>
+  grid.xAxis = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">arguments</span>.length) <span class="hljs-keyword">return</span> xAxis;
     xAxis = _;
     <span class="hljs-keyword">return</span> grid;
   };
 
-  grid.yAxis = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(_)</span> {</span>
+  grid.yAxis = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">_</span>) </span>{
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">arguments</span>.length) <span class="hljs-keyword">return</span> yAxis;
     yAxis = _;
     <span class="hljs-keyword">return</span> grid;
@@ -454,11 +435,11 @@ their old positions.</p>
         </li>
         
         
-        <li id="section-20">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <h2 id="some-help">Some help</h2>
 <p>What follows are helper functions that deal with some of the trickier
@@ -470,24 +451,41 @@ points of how to get tick positions and calculate the extent of scales
         </li>
         
         
-        <li id="section-21">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p>D3’s axis component does some quick and dirty arithmetic to center tick
 marks in the middle of each range band</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ordinalTickCorrection</span><span class="hljs-params">(s)</span> {</span>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ordinalTickCorrection</span>(<span class="hljs-params">s</span>) </span>{
     <span class="hljs-keyword">var</span> x = sOut = s.copy();
     <span class="hljs-keyword">if</span> (x.rangeBand) {
       <span class="hljs-keyword">var</span> dx = s.rangeBand() / <span class="hljs-number">2</span>;
-      sOut = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(d)</span> {</span> <span class="hljs-keyword">return</span> x(d) + dx; };
+      sOut = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d</span>) </span>{ <span class="hljs-keyword">return</span> x(d) + dx; };
     }
     <span class="hljs-keyword">return</span> sOut;
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>Checks if a scale is ordinal or not</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isOrdinal</span>(<span class="hljs-params">s</span>) </span>{
+    <span class="hljs-keyword">return</span> (s.rangeBand);
   }</pre></div></div>
             
         </li>
@@ -499,13 +497,15 @@ marks in the middle of each range band</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
-              <p>Checks if a scale is ordinal or not</p>
+              <p>Returns an array of values in data space</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isOrdinal</span><span class="hljs-params">(s)</span> {</span>
-    <span class="hljs-keyword">return</span> (s.rangeBand);
-  }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ticks</span>(<span class="hljs-params">xOrY</span>) </span>{
+
+    <span class="hljs-keyword">var</span>       axis = (xOrY === <span class="hljs-string">"x"</span>) ? xAxis : yAxis,
+                 s = axis.scale(),
+        tickValues = axis.tickValues();</pre></div></div>
             
         </li>
         
@@ -515,25 +515,6 @@ marks in the middle of each range band</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-23">&#182;</a>
-              </div>
-              <p>Returns an array of values in data space</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ticks</span><span class="hljs-params">(xOrY)</span> {</span>
-
-    <span class="hljs-keyword">var</span>       axis = (xOrY === <span class="hljs-string">"x"</span>) ? xAxis : yAxis,
-                 s = axis.scale(),
-        tickValues = axis.tickValues();</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-24">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>This is copied from D3’s
 <a href="https://github.com/mbostock/d3/blob/master/src/svg/axis.js#L28">axis component source</a>;
@@ -549,11 +530,11 @@ the policy for getting tick positions is apparently a little complicated.</p>
         </li>
         
         
-        <li id="section-25">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>How do you find the extent of a scale’s range? The simple answer is
 <code>d3.extent(s.range())</code> - but there are at least two problems with this. The
@@ -571,12 +552,12 @@ These are reproduced below, stolen from
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">d3_scaleExtent</span><span class="hljs-params">(domain)</span> {</span>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">d3_scaleExtent</span>(<span class="hljs-params">domain</span>) </span>{
     <span class="hljs-keyword">var</span> start = domain[<span class="hljs-number">0</span>], stop = domain[domain.length - <span class="hljs-number">1</span>];
     <span class="hljs-keyword">return</span> start &lt; stop ? [start, stop] : [stop, start];
   }
 
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">d3_scaleRange</span><span class="hljs-params">(scale)</span> {</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">d3_scaleRange</span>(<span class="hljs-params">scale</span>) </span>{
     <span class="hljs-keyword">return</span> scale.rangeExtent ? scale.rangeExtent() : d3_scaleExtent(scale.range());
   }
 
